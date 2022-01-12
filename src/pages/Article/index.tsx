@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
-import './ArticleStyles.css';
-import { MdClose } from 'react-icons/md';
+import Styles from './ArticleStyles.module.css';
 import { useNavigate } from 'react-router-dom';
+import { MdClose } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
 
 
 const Article = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [ isActive, setIsActive ] = useState<boolean>(false);
 
     const handleClick = () => {
         setIsActive(false);
+        dispatch({ type: "IS_ON", payload: false});
         setTimeout(() => {
             navigate('/');
         }, 400)
@@ -18,31 +21,32 @@ const Article = () => {
 
     useEffect(() => {
         setIsActive(true);
+        dispatch({ type: "IS_OFF", payload: true});
     }, []);
 
     return (
         <>
-            <article className={`article ${isActive && "active"}`}>
-                <MdClose className='close__icon' onClick={handleClick} />
-                <div className="article__container">
-                    <div className="article__header">
-                        <h3 className="article__title">
+            <article className={`${Styles.article} ${isActive && Styles.active}`}>
+                <MdClose className={Styles.close__icon} onClick={handleClick} />
+                <div className={Styles.article__container}>
+                    <div className={Styles.article__header}>
+                        <h3 className={Styles.article__title}>
                             Eminem купил NFT Bored Ape Yacht Club за $450 000
                         </h3>
-                        <div className="header__bottom">
-                            <div className="left">
-                                <span className="tag">NFT</span>
+                        <div className={Styles.header__bottom}>
+                            <div className={Styles.left}>
+                                <span className={Styles.tag}>NFT</span>
                             </div>
-                            <div className="right">
-                                <span className="read__time">2 min. read</span>
-                                <span className="create__time">15:22</span>
-                                <span className="create__date">01.01.2021</span>
+                            <div className={Styles.right}>
+                                <span className={Styles.read__time}>2 min. read</span>
+                                <span className={Styles.create__time}>15:22</span>
+                                <span className={Styles.create__date}>01.01.2021</span>
                             </div>
                         </div>
                     </div>
-                    <div className="article__content">
-                        <div className="article__img"></div>
-                        <div className="article__text">
+                    <div className={Styles.article__content}>
+                        <div className={Styles.article__img}></div>
+                        <div className={Styles.article__text}>
                             Американский рэпер Eminem приобрел невзаимозаменяемый токен (NFT) Bored Ape Yacht Club #9055 за 123,45 ETH (более $450 000 по курсу на момент написания).
                             <br />
                             <br />
@@ -61,10 +65,10 @@ const Article = () => {
                             Подписывайтесь на новости ForkLog в Telegram: ForkLog Feed — вся лента новостей, ForkLog — самые важные новости, инфографика и мнения.
                         </div>
                     </div>
-                    <div className="article__footer"></div>
+                    <div className={Styles.article__footer}></div>
                 </div>
             </article>
-            <div className="overlay" onClick={handleClick}></div>
+            <div className={Styles.overlay} onClick={handleClick}></div>
         </>
     )
 }

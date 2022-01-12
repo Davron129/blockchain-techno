@@ -23,16 +23,7 @@
 }
 
 .header__search {
-    width: 100%;
     padding: 10px 52px 10px 12px;
-    color: var(--text-dark);
-    font-size: 14px;
-    font-weight: 600;
-    caret-color: aqua;
-    border: 2px solid var(--text-dark);
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
 }
 
 .search__icon {
