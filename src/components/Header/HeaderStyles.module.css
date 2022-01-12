@@ -1,0 +1,122 @@
+.header {
+    max-width: 1920px;
+    height: 92px;
+    padding: 40px 40px 12px 40px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__logo {
+    width: 128px;
+    cursor: pointer;
+}
+
+.header__middle {
+    width: 480px;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.header__search {
+    width: 100%;
+    padding: 10px 52px 10px 12px;
+    color: var(--text-dark);
+    font-size: 14px;
+    font-weight: 600;
+    caret-color: aqua;
+    border: 2px solid var(--text-dark);
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.search__icon {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 16px;
+}
+
+.header__right {
+    display: flex;
+}
+
+.header__menu {
+    margin-right: 38px;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+}
+
+.header__item {
+    margin: 0 10px;
+}
+
+.header__link {
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--text-dark);
+}
+
+.color__changer {
+    width: 74px;
+    height: 40px;
+    display: inline-block;
+    position: relative;
+    -webkit-border-radius: 19px;
+    -moz-border-radius: 19px;
+    border-radius: 19px;
+    background-color: #686868;
+    cursor: pointer;
+}
+
+.color__changer .bg {
+    width: 28px;
+    height: 28px;
+    margin-top: 6px;
+    margin-left: 6px;
+    display: inline-block;
+    position: absolute;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: .3s ease-in-out;
+    z-index: 10;
+}
+
+.color__changer .icon {
+    width: 16px;
+    height: 16px;
+    z-index: 20;
+    margin-top: 12px;
+    position: absolute;
+    color: #FFFFFF;
+    transition: .3s linear;
+}
+
+.color__changer .sun {
+    margin-left: 12px;
+}
+
+.color__changer .moon {
+    margin-left: 46px;
+}
+
+.color__changer .active {
+    color: #686868;
+    transition: .3s linear;
+}
+
+.color__changer input:checked + .bg {
+    margin-left: 40px;
+    transition: .3s ease-in-out;
+}
