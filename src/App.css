@@ -3,4 +3,10 @@
 .App {
   width: 100%;
   overflow-x: hidden;
+  background-color: var(--articleBg);
 }
+
+[data-scroll="false"]::-webkit-scrollbar {
+  background-color: #FFF;
+}
+

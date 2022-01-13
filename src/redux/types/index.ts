@@ -1,0 +1,5 @@
+export const ENABLE_SCROLL = "ENABLE_SCROLL";
+export const DISABLE_SCROLL = "DISABLE_SCROLL";
+
+export const LIGHT_SCHEME = "LIGHT_SCHEME";
+export const DARK_SCHEME = "DARK_SCHEME";

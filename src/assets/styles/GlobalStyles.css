@@ -26,14 +26,18 @@ input, textarea, button {
 input, textarea {
     width: 100%;
     padding: 10px 12px;
-    color: var(--text-dark);
+    color: var(--text);
     font-size: 14px;
     font-weight: 600;
     caret-color: aqua;
-    border: 2px solid var(--text-dark);
+    border: 2px solid var(--text);
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
+}
+
+input:focus, textarea:focus {
+    border: none;
 }
 
 img, svg {
@@ -41,7 +45,47 @@ img, svg {
 }
 
 :root {
-    --text-dark: #000000;
-    --text-grey: #898989;
-    --bg-light: #FFFFFF;
+    --black: #000000;
+    --white: #FFFFFF;
+    --colorChanger-light: #686868;
+    --colorChanger-dark: var(--white);
+    --colorChangerBg-light: var(--white);
+    --colorChangerBg-dark: var(--colorChanger-light);
+    --overlay-light: rgba(0,0,0,0.3);
+    --overlay-dark: rgba(0,0,0,0.8);
+    --socialLink-light: #888888; 
+    --socialLink-dark: #888888; 
+    --socialLinkBorder: #f3f3f3;
 }
+
+[color-scheme="light"] {
+    --text: var(--black);
+    --text-grey: #898989;
+    --border: var(--black);
+    --colorChanger: var(--colorChanger-light);
+    --colorChangerBg: var(--colorChangerBg-light);
+    --loader: var(--black);
+    --loaderBg: var(--white);
+    --articleBg: var(--white);
+    --articleTag: var(--text-grey);
+    --articleBorder: var(--black);
+    --overlay: var(--overlay-light);
+    --socialLink: var(--socialLink-light); 
+}
+
+[color-scheme="dark"] {
+    --text: var(--white);
+    --text-grey: #d3d3d3;
+    --border: var(--white);
+    --colorChanger: var(--colorChanger-dark);
+    --colorChangerBg: var(--colorChangerBg-dark);
+    --loader: var(--white);
+    --loaderBg: var(--colorChanger-light);
+    --articleBg: var(--colorChanger-light);
+    --articleTag: #ff9900;
+    --articleBorder: #8c8c8c;
+    --overlay: var(--overlay-dark);
+    --socialLink: var(--white); 
+}
+
+

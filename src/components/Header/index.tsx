@@ -1,8 +1,11 @@
-import React, {useState} from "react";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../schemas";
 import {FiMoon, FiSearch, FiSun} from "react-icons/fi";
 import Logo from "../../assets/images/Logo.png";
 
-import Styles from './HeaderStyles.module.css'
+import Styles from './HeaderStyles.module.css';
+import { lightScheme, darkScheme } from "../../redux/actions/colorScheme";
 
 type ItemType = {
     link: string;
@@ -18,7 +21,9 @@ const HeaderItem = ({link, text}: ItemType) => {
 }
 
 const Header = () => {
-    const[ isLight, setIsLight ] = useState<boolean>(true);
+    const dispatch = useDispatch();
+    const colorScheme = useSelector((state: RootState) => state.colorScheme.isLight);
+    // const [ isLight, setIsLight ] = useState<boolean>(colorScheme);
 
     return (
         <div className={Styles.header}>
@@ -44,12 +49,17 @@ const Header = () => {
                     <input
                         type="checkbox"
                         hidden={true}
-                        checked={!isLight}
-                        onChange={() => setIsLight(!isLight)}
+                        checked={colorScheme}
+                        onChange={(e) => { 
+                            e.target.checked ? dispatch(lightScheme()) : dispatch(darkScheme());
+                            console.log(e.target.checked);
+                            console.log(colorScheme)
+                            
+                         }}
                     />
                     <span className={Styles.bg}></span>
-                    <FiSun className={`${Styles.icon} ${Styles.sun} ${isLight && Styles.active}`} />
-                    <FiMoon className={`${Styles.icon} ${Styles.moon} ${!isLight && Styles.active}`} />
+                    <FiSun className={`${Styles.icon} ${Styles.sun} ${colorScheme && Styles.active}`} />
+                    <FiMoon className={`${Styles.icon} ${Styles.moon} ${!colorScheme && Styles.active}`} />
                 </label>
             </div>
         </div>

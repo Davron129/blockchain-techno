@@ -1,3 +1,5 @@
+@import '../../assets/styles/GlobalStyles.css';
+
 .overlay {
     display: inline-block;
     position: fixed;
@@ -5,7 +7,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: var(--overlay);
     z-index: 20;
 }
 
@@ -15,7 +17,7 @@
     position: fixed;
     top: 0;
     right: -640px;
-    background-color: #fff;
+    background-color: var(--articleBg);
     z-index: 30;
     overflow-y: auto;
     transition: .4s ease-in-out;
@@ -33,6 +35,7 @@
     top: 24px;
     right: 24px;
     cursor: pointer;
+    color: var(--text);
 }
 
 .article__container {
@@ -43,6 +46,7 @@
 .article__header,
 .description {
     margin-bottom: 24px;
+    color: var(--text);
 }
 
 .logo {
@@ -56,7 +60,7 @@
 
 .date span {
     display: inline-block;
-    color: #898989;
+    color: var(--text-grey);
     font-style: 14px;
     font-weight: 500;
     line-height: 1.4;
@@ -75,6 +79,7 @@
     line-height: 24px;
     font-weight: bold;
     letter-spacing: 0.02;
+    color: var(--text);
 }
 
 .form__wrapper label {
@@ -87,7 +92,7 @@
     display: inline-block;
     font-size: 14px;
     line-height: 20px;
-    color: #898989;
+    color: var(--text-grey);
     letter-spacing: 0.02;
 }
 
@@ -121,6 +126,7 @@ button {
     font-size: 12px;
     line-height: 24px;
     font-weight: 500;
+    color: var(--text);
 }
 
 .social__links .link {
@@ -131,12 +137,12 @@ button {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    border: 1.5px solid #f3f3f3;
+    border: 1.5px solid var(--socialLinkBorder);
     cursor: pointer;
 }
 
 .social__links .link svg {
-    color: #888;
+    color: var(--socialLink);
 }
 
 .download__btn {
@@ -154,7 +160,7 @@ button {
 .contact__footer .info {
     font-size: 10px;
     line-height: 1.4;
-    color: #898989;
+    color: var(--text-grey);
     letter-spacing: 0.04;
 }
 

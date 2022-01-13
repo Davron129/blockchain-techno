@@ -20,7 +20,7 @@ const Contact = () => {
 
     const handleClick = () => {
         setIsActive(false);
-        dispatch({ type: "IS_OFF", payload: false })
+        dispatch({ type: "IS_OFF" })
         setTimeout(() => {
             navigate('/');
         }, 400)
@@ -34,7 +34,7 @@ const Contact = () => {
 
     useEffect(() => {
         setIsActive(true);
-        dispatch({ type: "IS_OFF", payload: true })
+        dispatch({ type: "IS_OFF" })
     }, [dispatch]);
 
     return (

@@ -1,3 +1,5 @@
+@import '../../assets/styles/GlobalStyles.css';
+
 .loader {
     position: fixed;
     top: 0;
@@ -8,7 +10,7 @@
 
 .loader__container {
     margin-top: 92px;
-    background-color: #fff;
+    background-color: var(--loaderBg);
     width: 100vw;
     height: calc(100vh - 92px);
     opacity: .9;
@@ -28,7 +30,7 @@
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
-    background-color: #000;
+    background-color: var(--loader);
 }
 
 .loader__wrapper .one {

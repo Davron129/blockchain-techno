@@ -1,4 +1,5 @@
 import { AnyAction } from 'redux';
+import { ENABLE_SCROLL, DISABLE_SCROLL } from '../types/index'
 
 interface InitialStateInterface {
     isScrollable: boolean
@@ -10,13 +11,13 @@ const InitialState: InitialStateInterface = {
 
 export const scroll = (state = InitialState, action: AnyAction) => {
     switch (action.type) {
-        case 'IS_OFF':
+        case ENABLE_SCROLL:
             return {
-                isScrollable: action.payload
+                isScrollable: true
             }
-        case 'IS_ON':
+        case DISABLE_SCROLL:
             return {
-                isScrollable: action.payload
+                isScrollable: false
             }
         default:
             return state

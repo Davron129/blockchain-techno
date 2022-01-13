@@ -3,6 +3,7 @@ import Styles from './ArticleStyles.module.css';
 import { useNavigate } from 'react-router-dom';
 import { MdClose } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
+import { disableScroll, enableScroll } from '../../redux/actions/scroll';
 
 
 const Article = () => {
@@ -12,16 +13,18 @@ const Article = () => {
 
     const handleClick = () => {
         setIsActive(false);
-        dispatch({ type: "IS_ON", payload: false});
+        dispatch(enableScroll());
+        document.body.setAttribute("data-scroll", "true");
         setTimeout(() => {
             navigate('/');
         }, 400)
-
+        
     }
-
+    
     useEffect(() => {
         setIsActive(true);
-        dispatch({ type: "IS_OFF", payload: true});
+        dispatch(disableScroll());
+        document.body.setAttribute("data-scroll", "false");
     }, []);
 
     return (
