@@ -14,7 +14,6 @@ const Article = () => {
     const handleClick = () => {
         setIsActive(false);
         dispatch(enableScroll());
-        document.body.setAttribute("data-scroll", "true");
         setTimeout(() => {
             navigate('/');
         }, 400)
@@ -23,9 +22,10 @@ const Article = () => {
     
     useEffect(() => {
         setIsActive(true);
+        console.log("disable scroll");
+        
         dispatch(disableScroll());
-        document.body.setAttribute("data-scroll", "false");
-    }, []);
+    }, [dispatch]);
 
     return (
         <>

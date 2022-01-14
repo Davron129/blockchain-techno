@@ -4,11 +4,22 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter} from "react-router-dom";
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import reducers from './redux/reducers/store';
 
-const store = createStore(reducers);
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+  reducers,
+  composeEnhancers()
+); 
 
 ReactDOM.render(
   <React.StrictMode>

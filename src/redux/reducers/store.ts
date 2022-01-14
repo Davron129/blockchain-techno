@@ -4,5 +4,5 @@ import { colorScheme } from "./colorScheme";
 
 export default combineReducers({
     scroll,
-    colorScheme
+    colorScheme,
 })

@@ -8,6 +8,7 @@ import AfterSubmit from './AfterSubmit';
 import SocialLinks from './SocialLinks';
 import ContactFooter from './ContactFooter';
 import { useDispatch } from 'react-redux';
+import { enableScroll, disableScroll } from '../../redux/actions/scroll';
 
 
 const Contact = () => {
@@ -20,7 +21,7 @@ const Contact = () => {
 
     const handleClick = () => {
         setIsActive(false);
-        dispatch({ type: "IS_OFF" })
+        dispatch(enableScroll());
         setTimeout(() => {
             navigate('/');
         }, 400)
@@ -34,7 +35,7 @@ const Contact = () => {
 
     useEffect(() => {
         setIsActive(true);
-        dispatch({ type: "IS_OFF" })
+        dispatch(disableScroll());
     }, [dispatch]);
 
     return (

@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../schemas";
 import {FiMoon, FiSearch, FiSun} from "react-icons/fi";
 import Logo from "../../assets/images/Logo.png";
+import LogoLight from '../../assets/images/logoLight.png';
 
 import Styles from './HeaderStyles.module.css';
 import { lightScheme, darkScheme } from "../../redux/actions/colorScheme";
@@ -23,13 +23,16 @@ const HeaderItem = ({link, text}: ItemType) => {
 const Header = () => {
     const dispatch = useDispatch();
     const colorScheme = useSelector((state: RootState) => state.colorScheme.isLight);
-    // const [ isLight, setIsLight ] = useState<boolean>(colorScheme);
 
     return (
         <div className={Styles.header}>
             <div className={Styles.header__left}>
                 <div className={Styles.header__logo}>
-                    <img src={Logo} alt="Blockchain Techno Logo"/>
+                    {
+                        colorScheme 
+                            ? <img src={Logo} alt="Blockchain Techno Logo"/>
+                            : <img src={LogoLight} alt="Blockchain Techno Logo"/>
+                    }
                 </div>
             </div>
             <div className={Styles.header__middle}>

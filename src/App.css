@@ -7,6 +7,6 @@
 }
 
 [data-scroll="false"]::-webkit-scrollbar {
-  background-color: #FFF;
+  background-color: var(--articleBg);
 }
 
