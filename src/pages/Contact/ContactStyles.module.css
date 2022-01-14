@@ -190,3 +190,31 @@ button {
     line-height: 32px;
     letter-spacing: 0.02;
 }
+
+
+@media (max-width: 768px) {
+    .article {
+        width: 100%;
+    }
+}
+
+@media (max-width: 510px) {
+    .article__container {
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    .article__header,
+    .article__text {
+        padding: 0;
+    }
+
+    .article__title {
+        font-size: 20px;
+    }
+
+    .article__content .article__img {
+        width: 100%;
+    }
+
+}

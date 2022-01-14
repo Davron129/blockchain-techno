@@ -61,3 +61,39 @@
     border-bottom: 1.5px solid;
     cursor: pointer;
 }
+
+@media (max-width: 1200px) {
+    .article__container {
+        margin-top: 70px;
+    }
+}
+
+@media (max-width: 510px) {
+    .article__wrapper {
+        padding: 0;
+    }
+
+    .article {
+        padding: 16px 0;
+    }
+
+    .article__container {
+        width: 100%;
+    }
+
+    .article__img {
+        height: 37.5vw;
+        margin-bottom: 16px;
+    }
+
+    .article__date span {
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    .article__content .article__title a {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+}

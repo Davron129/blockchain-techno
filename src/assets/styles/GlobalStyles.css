@@ -11,24 +11,13 @@
     font-family: 'Inter', sans-serif;
 }
 
-input, textarea, button {
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-    background: none;
-    -webkit-appearance: none;
-    appearance: none;
-    -moz-appearance: none;
-    border-radius: 0;
-    -webkit-border-radius: 0;
-}
-
 input, textarea {
     width: 100%;
     padding: 10px 12px;
     color: var(--text);
     font-size: 14px;
     font-weight: 600;
+    background-color: var(--articleBg);
     caret-color: aqua;
     border: 2px solid var(--text);
     -webkit-border-radius: 0;
@@ -37,7 +26,8 @@ input, textarea {
 }
 
 input:focus, textarea:focus {
-    border: none;
+    border-color: var(--text);
+    outline: none;
 }
 
 img, svg {
@@ -86,6 +76,10 @@ img, svg {
     --articleBorder: #8c8c8c;
     --overlay: var(--overlay-dark);
     --socialLink: var(--white); 
+}
+
+body {
+    scroll-behavior: smooth;
 }
 
 

@@ -10,3 +10,9 @@
   background-color: var(--articleBg);
 }
 
+@media (max-width: 510px) {
+  .App {
+    padding: 0 15px;
+  }
+}
+

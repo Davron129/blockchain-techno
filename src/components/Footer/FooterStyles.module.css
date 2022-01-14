@@ -35,3 +35,14 @@
     cursor: pointer;
     color: var(--text);
 }
+
+@media (max-width: 510px) {
+    .footer {
+        width: 100%;
+        padding: 16px 0;
+    }
+
+    .go__top {
+        right: 0;
+    }
+}
