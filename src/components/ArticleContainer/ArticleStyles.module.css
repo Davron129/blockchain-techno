@@ -1,6 +1,7 @@
 .article__container {
     width: 480px;
-    margin: 12px auto;
+    min-height: calc(100vh - 184px);
+    margin: 104px auto 12px auto;
 }
 
 .article__img {
@@ -8,7 +9,7 @@
     height: 180px;
     margin-bottom: 32px;
     background-color: var(--text-grey);
-}
+}       
 
 .article__date {
     margin-bottom: 8px;
@@ -64,7 +65,7 @@
 
 @media (max-width: 1200px) {
     .article__container {
-        margin-top: 70px;
+        margin-top: 174px;
     }
 }
 

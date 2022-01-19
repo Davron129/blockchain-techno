@@ -26,44 +26,43 @@ const Header = () => {
 
     return (
         <div className={Styles.header}>
-            <div className={Styles.header__left}>
-                <div className={Styles.header__logo}>
-                    {
-                        colorScheme 
-                            ? <img src={Logo} alt="Blockchain Techno Logo"/>
-                            : <img src={LogoLight} alt="Blockchain Techno Logo"/>
-                    }
+            <div className={Styles.header__container}>
+                <div className={Styles.header__left}>
+                    <div className={Styles.header__logo}>
+                        {
+                            colorScheme 
+                                ? <img src={Logo} alt="Blockchain Techno Logo"/>
+                                : <img src={LogoLight} alt="Blockchain Techno Logo"/>
+                        }
+                    </div>
                 </div>
-            </div>
-            <div className={Styles.header__middle}>
-                <div className={Styles.searchbar}>
-                    <form>
-                        <input type="text" className={Styles.header__search} />
-                        <FiSearch className={Styles.search__icon} />
-                    </form>
+                {/* <div className={Styles.header__middle}>
+                    <div className={Styles.searchbar}>
+                        <form>
+                            <input type="text" className={Styles.header__search} />
+                            <FiSearch className={Styles.search__icon} />
+                        </form>
+                    </div>
+                </div> */}
+                <div className={Styles.header__right}>
+                    <ul className={Styles.header__menu}>
+                        <HeaderItem link={"#"} text={"Youtube"} />
+                        <HeaderItem link={"#"} text={"Telegram"} />
+                    </ul>
+                    <label className={Styles.color__changer}>
+                        <input
+                            type="checkbox"
+                            hidden={true}
+                            checked={colorScheme}
+                            onChange={(e) => { 
+                                e.target.checked ? dispatch(lightScheme()) : dispatch(darkScheme());
+                            }}
+                        />
+                        <span className={Styles.bg}></span>
+                        <FiSun className={`${Styles.icon} ${Styles.sun} ${colorScheme && Styles.active}`} />
+                        <FiMoon className={`${Styles.icon} ${Styles.moon} ${!colorScheme && Styles.active}`} />
+                    </label>
                 </div>
-            </div>
-            <div className={Styles.header__right}>
-                <ul className={Styles.header__menu}>
-                    <HeaderItem link={"#"} text={"Youtube"} />
-                    <HeaderItem link={"#"} text={"Telegram"} />
-                </ul>
-                <label className={Styles.color__changer}>
-                    <input
-                        type="checkbox"
-                        hidden={true}
-                        checked={colorScheme}
-                        onChange={(e) => { 
-                            e.target.checked ? dispatch(lightScheme()) : dispatch(darkScheme());
-                            console.log(e.target.checked);
-                            console.log(colorScheme)
-                            
-                         }}
-                    />
-                    <span className={Styles.bg}></span>
-                    <FiSun className={`${Styles.icon} ${Styles.sun} ${colorScheme && Styles.active}`} />
-                    <FiMoon className={`${Styles.icon} ${Styles.moon} ${!colorScheme && Styles.active}`} />
-                </label>
             </div>
         </div>
     )

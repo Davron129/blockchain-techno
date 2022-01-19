@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { disableScroll, enableScroll } from '../../redux/actions/scroll';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+
 import Api from '../../utils/api';
 import { getFormattedTime, getFormattedDay } from '../../utils/data'
+import { disableScroll, enableScroll } from '../../redux/actions/scroll';
+
 import { MdClose } from 'react-icons/md';
-import Styles from './ArticleStyles.module.css';
 import { TagInterface } from '../../schemas';
+import Styles from './ArticleStyles.module.css';
 
 interface ParagraphInterface {
     id: string;
@@ -43,8 +46,10 @@ const Article = () => {
     const params = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [ title, setTitle ] = useState<string>("");
+    const [ post, setPost ] = useState<PostInterface>();
     const [ isActive, setIsActive ] = useState<boolean>(false);
-    const [ post, setPost ] = useState<PostInterface>()
+    const [ description, setDescription ] = useState<string>("");
 
     const handleClick = () => {
         setIsActive(false);
@@ -54,30 +59,33 @@ const Article = () => {
         }, 400)
         
     }
-    
-    const getPost = () => {
-        new Api()
-            .getPost(params.id)
-            .then(({data}) => {
-                console.log(data.data);
-                setPost(data.data)
-                
-            })
-    }
 
     useEffect(() => {
         setIsActive(true);
         dispatch(disableScroll());
-        getPost();
         
     }, [dispatch]);
 
-    // useEffect(() => {
+    useEffect(() => {
+        new Api()
+            .getPost(params.id)
+            .then(({data}) => {
+                setPost(data.data);
+                setTitle(data.data.title);
+                setDescription(data.data.body.blocks.filter((post: ParagraphInterface) => post.type === "paragraph")[0].data.text)
+            })
+        return () => {
+            setTitle("Blockchain Texno")
+        }
 
-    // })
+    }, [params.id])
 
     return (
         <>
+            <Helmet>
+                <title>{title}</title>
+                <meta name="description" content={description} />
+            </Helmet>
             <article className={`${Styles.article} ${isActive && Styles.active}`}>
                 <MdClose className={Styles.close__icon} onClick={handleClick} />
                 {
@@ -104,9 +112,6 @@ const Article = () => {
                                         <React.Fragment key={block.id} >
                                             {block.type === "paragraph" && <p className={Styles.article__text} dangerouslySetInnerHTML={{ __html: block.data.text}} />
                                             }
-                                            {/* {block.type === "image" && <div className={Styles.article__img} >
-                                                <img src={`http://blockchaintexno.uz/${block.data.file.url}`} alt={post.title} />    
-                                            </div>} */}
                                             {block.type === "image" && <figure className={Styles.article__img} >
                                                 <img src={`http://blockchaintexno.uz/${block.data.file.url}`} alt={post.title} />  
                                                 { block.data.caption && <figcaption>{block.data.caption}</figcaption> }  

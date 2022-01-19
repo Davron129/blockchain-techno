@@ -8,7 +8,7 @@
     right: 0;
     bottom: 0;
     background-color: var(--overlay);
-    z-index: 20;
+    z-index: 25;
 }
 
 .article {
@@ -110,7 +110,6 @@
     width: 100%;
     min-height: 80px;
     margin-bottom: 24px;
-    /* background-color: var(--text-grey); */
     object-position: center;
 }
 
