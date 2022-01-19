@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../../schemas';
+import { RootState } from '../../redux/reducers/store';
 import Logo from '../../assets/images/Logo.png';
 import LogoLight from '../../assets/images/logoLight.png';
 import Styles from './ContactStyles.module.css';

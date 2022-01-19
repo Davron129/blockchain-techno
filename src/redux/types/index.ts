@@ -3,3 +3,5 @@ export const DISABLE_SCROLL = "DISABLE_SCROLL";
 
 export const LIGHT_SCHEME = "LIGHT_SCHEME";
 export const DARK_SCHEME = "DARK_SCHEME";
+
+export const FETCH_POSTS = "FETCH_POSTS";

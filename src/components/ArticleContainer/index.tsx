@@ -1,7 +1,24 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Api from '../../utils/api';
+import { PostsInterface } from '../../schemas';
 import Styles from './ArticleStyles.module.css';
 
 const ArticleContainer = () => {
+    const [ posts, setPosts ] = useState<PostsInterface>([]);
+
+    const getPosts = () => {
+        new Api()
+            .getPosts()
+            .then(({data}) => {
+                setPosts((prev) => [...prev, ...data.data.posts])
+            })
+    }
+
+    useEffect(() => {
+        getPosts();
+    }, [])
+
     return (
         <section className={Styles.article__container}>
             <div className={Styles.article__img}>
@@ -10,17 +27,17 @@ const ArticleContainer = () => {
                 <span>Bugun</span>
             </div>
             {
-                new Array(5).fill(0).map((num, index) => (
+                posts.map((post, index) => (
                     <div className={Styles.article__wrapper} key={index}>
                         <article className={Styles.article}>
                             <div className={Styles.article__header}>
-                                <span className={Styles.article__tag}>Blockchain</span>
-                                <span className={Styles.article__time}>30 daqiqa oldin</span>
+                                <span className={Styles.article__tag}>{post.tag.name}</span>
+                                <span className={Styles.article__time}>{post.createdAt}</span>
                             </div>
                             <div className={Styles.article__content}>
                                 <h3 className={Styles.article__title}>
-                                    <Link to="/article/salom">
-                                        👀 Daniel Larimer 2022-yilda EOS asosidagi qotil ilovani ishga tushirishga va’da berdi. Uning so‘zlariga ko‘ra, tez orada yangi loyihaning yo‘l xaritasi va oq qog‘ozi taqdim etiladi.
+                                    <Link to={`/article/${post._id}`}>
+                                        {post.title}
                                     </Link>
                                 </h3>
                             </div>

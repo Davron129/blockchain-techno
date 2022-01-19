@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../schemas";
+import { RootState } from "../../redux/reducers/store";
 import {FiMoon, FiSearch, FiSun} from "react-icons/fi";
 import Logo from "../../assets/images/Logo.png";
 import LogoLight from '../../assets/images/logoLight.png';

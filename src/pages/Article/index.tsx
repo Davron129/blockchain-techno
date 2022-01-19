@@ -1,15 +1,50 @@
-import { useState, useEffect } from 'react';
-import Styles from './ArticleStyles.module.css';
-import { useNavigate } from 'react-router-dom';
-import { MdClose } from 'react-icons/md';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { disableScroll, enableScroll } from '../../redux/actions/scroll';
+import Api from '../../utils/api';
+import { getFormattedTime, getFormattedDay } from '../../utils/data'
+import { MdClose } from 'react-icons/md';
+import Styles from './ArticleStyles.module.css';
+import { TagInterface } from '../../schemas';
 
+interface ParagraphInterface {
+    id: string;
+    data: {
+        text: string;
+    }
+    type: "paragraph"
+}
+
+interface ImageInterface {
+    id: string;
+    data: {
+        caption: string;
+        file: {
+            url: string;
+        }
+    };
+    type: "image"
+}
+
+interface PostInterface {
+    _id: string;
+    title: string;
+    tag: TagInterface;
+    readingTime: number;
+    createdAt: number;
+    views: number;
+    body: {
+        blocks: (ParagraphInterface | ImageInterface)[]
+    }
+}
 
 const Article = () => {
+    const params = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [ isActive, setIsActive ] = useState<boolean>(false);
+    const [ post, setPost ] = useState<PostInterface>()
 
     const handleClick = () => {
         setIsActive(false);
@@ -20,56 +55,70 @@ const Article = () => {
         
     }
     
+    const getPost = () => {
+        new Api()
+            .getPost(params.id)
+            .then(({data}) => {
+                console.log(data.data);
+                setPost(data.data)
+                
+            })
+    }
+
     useEffect(() => {
         setIsActive(true);
-        console.log("disable scroll");
-        
         dispatch(disableScroll());
+        getPost();
+        
     }, [dispatch]);
+
+    // useEffect(() => {
+
+    // })
 
     return (
         <>
             <article className={`${Styles.article} ${isActive && Styles.active}`}>
                 <MdClose className={Styles.close__icon} onClick={handleClick} />
-                <div className={Styles.article__container}>
-                    <div className={Styles.article__header}>
-                        <h3 className={Styles.article__title}>
-                            Eminem купил NFT Bored Ape Yacht Club за $450 000
-                        </h3>
-                        <div className={Styles.header__bottom}>
-                            <div className={Styles.left}>
-                                <span className={Styles.tag}>NFT</span>
+                {
+                    post && (
+                        <div className={Styles.article__container}>
+                            <div className={Styles.article__header}>
+                                <h3 className={Styles.article__title}>
+                                    { post.title }
+                                </h3>
+                                <div className={Styles.header__bottom}>
+                                    <div className={Styles.left}>
+                                        <span className={Styles.tag}>{post.tag.name}</span>
+                                    </div>
+                                    <div className={Styles.right}>
+                                        <span className={Styles.read__time}>{Math.ceil(post.readingTime / 60)} min. read</span>
+                                        <span className={Styles.create__time}>{getFormattedTime(post.createdAt)}</span>
+                                        <span className={Styles.create__date}>{getFormattedDay(post.createdAt)}</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div className={Styles.right}>
-                                <span className={Styles.read__time}>2 min. read</span>
-                                <span className={Styles.create__time}>15:22</span>
-                                <span className={Styles.create__date}>01.01.2021</span>
+                            <div className={Styles.article__content}>
+                                {
+                                    post.body.blocks.map((block: (ParagraphInterface | ImageInterface)) => (
+                                        <React.Fragment key={block.id} >
+                                            {block.type === "paragraph" && <p className={Styles.article__text} dangerouslySetInnerHTML={{ __html: block.data.text}} />
+                                            }
+                                            {/* {block.type === "image" && <div className={Styles.article__img} >
+                                                <img src={`http://blockchaintexno.uz/${block.data.file.url}`} alt={post.title} />    
+                                            </div>} */}
+                                            {block.type === "image" && <figure className={Styles.article__img} >
+                                                <img src={`http://blockchaintexno.uz/${block.data.file.url}`} alt={post.title} />  
+                                                { block.data.caption && <figcaption>{block.data.caption}</figcaption> }  
+                                            </figure>}
+                                        </ React.Fragment >
+                                    ))
+                                }
                             </div>
+                            <div className={Styles.article__footer}></div>
                         </div>
-                    </div>
-                    <div className={Styles.article__content}>
-                        <div className={Styles.article__img}></div>
-                        <div className={Styles.article__text}>
-                            Американский рэпер Eminem приобрел невзаимозаменяемый токен (NFT) Bored Ape Yacht Club #9055 за 123,45 ETH (более $450 000 по курсу на момент написания).
-                            <br />
-                            <br />
-                            Eminem также обновил фото своего профиля в Twitter на купленное изображение.
-                            <br />
-                            <br />
-                            Покупателем стал аккаунт с ником Shady_Holdings на NFT-маркетплейсе OpenSea. На его кошельке хранятся более 40 токенов из разных коллекций.
-                            <br />
-                            <br />
-                            Ранее владелец популярного ночного клуба в Майами и комплекса кондоминиумов E11EVEN Hotel and Residences — компания E11EVEN Partners — приобрела NFT из коллекции Bored Ape Yacht Club за 99 ETH (около $396 000 на момент сделки).
-                            <br />
-                            <br />
-                            Напомним, люксовый NFT-маркетплейс UNXD совместно с GameFi-проектом Decentraland анонсировал Metaverse Fashion Week в метавселенной.
-                            <br />
-                            <br />
-                            Подписывайтесь на новости ForkLog в Telegram: ForkLog Feed — вся лента новостей, ForkLog — самые важные новости, инфографика и мнения.
-                        </div>
-                    </div>
-                    <div className={Styles.article__footer}></div>
-                </div>
+                    )
+                }
             </article>
             <div className={Styles.overlay} onClick={handleClick}></div>
         </>
