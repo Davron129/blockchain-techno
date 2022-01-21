@@ -81,3 +81,10 @@
     }
 }
 
+
+@media (max-width: 560px) {
+    .loader__container {
+        height: 100vh;
+        margin-top: 0;
+    }
+}

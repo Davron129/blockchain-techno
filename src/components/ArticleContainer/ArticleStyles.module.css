@@ -79,7 +79,7 @@
 
 @media (max-width: 510px) {
     .article__wrapper {
-        padding: 0;
+        padding: 0 15px;
     }
 
     .article {
@@ -88,10 +88,11 @@
 
     .article__container {
         width: 100%;
+        margin-bottom: 120px;
     }
 
     .article__img {
-        height: 37.5vw;
+        min-height: 37.5vw;
         margin-bottom: 16px;
     }
 

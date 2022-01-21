@@ -153,12 +153,24 @@
         padding: 0;
     }
 
+    .header__bottom span {
+        font-size: 12px;
+    }
+
+    .header__bottom .read__time {
+        margin-right: 16px;
+    }
+
     .article__title {
         font-size: 20px;
     }
 
     .article__content .article__img {
         width: 100%;
+    }
+
+    .article__footer {
+        padding: 20px 0;
     }
 
 }

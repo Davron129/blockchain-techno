@@ -41,7 +41,6 @@ const ArticleContainer = () => {
         new Api()
             .getHeaderImage()
             .then(({data}) => {
-                console.log(data.data[0].url);
                 setHeaderImg(data.data[0].url);
             })
     }
@@ -103,8 +102,8 @@ const ArticleContainer = () => {
                     ))
                 }
                 { loader && <ArticleLoader /> }
-                { isLoading && <Loader /> }
             </section>
+            { isLoading && <Loader /> }
         </>
     )
 }
