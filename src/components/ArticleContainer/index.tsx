@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Api from '../../utils/api';
 import { PostsInterface } from '../../schemas';
@@ -6,6 +6,9 @@ import Styles from './ArticleStyles.module.css';
 import Loader from '../Loader';
 import SearchBar from '../SearchBar'
 import ArticleLoader from '../Loader/ArticleLoader';
+import { getTimeInterval } from '../../utils/getTimeInterval';
+import { getCreatedDate } from './../../utils/getCreatedDate';
+import { getFormattedDay } from '../../utils/data';
 
 const ArticleContainer = () => {
     const [ curPage, setCurPage ] = useState<number>(1);
@@ -61,26 +64,42 @@ const ArticleContainer = () => {
                     <img src={headerImg} alt="" />
                 </div>
                 {/* mana shu qismni createAt ga qarab o`zgaradigan qilishimiz kerak */}
-                <div className={Styles.article__date}>
-                    <span>Bugun</span>
-                </div>
                 {
                     posts.map((post, index) => (
-                        <div className={Styles.article__wrapper} key={index}>
-                            <article className={Styles.article}>
-                                <div className={Styles.article__header}>
-                                    <span className={Styles.article__tag}>{post.tag.name}</span>
-                                    <span className={Styles.article__time}>{post.createdAt}</span>
-                                </div>
-                                <div className={Styles.article__content}>
-                                    <h3 className={Styles.article__title}>
-                                        <Link to={`/article/${post._id}`}>
-                                            {post.title}
-                                        </Link>
-                                    </h3>
-                                </div>
-                            </article>
-                        </div>
+                        <React.Fragment key={post._id}>
+                            {
+                                index === 0
+                                    ? (
+                                        <div className={Styles.article__date}>
+                                            <span>
+                                                {getCreatedDate(null, post.createdAt * 1000)}
+                                            </span>
+                                        </div>
+                                    ) : (
+                                        getCreatedDate(posts[index-1].createdAt * 1000 , post.createdAt * 1000) && <div className={Styles.article__date}>
+                                            <span>
+                                                {getCreatedDate(posts[index-1].createdAt * 1000 , post.createdAt * 1000)}
+                                            </span>
+                                        </div>
+                                    )
+                            }
+
+                            <div className={`${Styles.article__wrapper} ${(index > 0 && index !== posts.length - 1 && getCreatedDate(post.createdAt * 1000, posts[index+1].createdAt * 1000)) ? Styles.noborder : Styles.border}`}>
+                                <article className={Styles.article}>
+                                    <div className={Styles.article__header}>
+                                        <span className={Styles.article__tag}>{post.tag.name}</span>
+                                        <span className={Styles.article__time}>{getTimeInterval(post.createdAt)}</span>
+                                    </div>
+                                    <div className={Styles.article__content}>
+                                        <h3 className={Styles.article__title}>
+                                            <Link to={`/article/${post._id}`}>
+                                                {post.title}
+                                            </Link>
+                                        </h3>
+                                    </div>
+                                </article>
+                            </div>
+                        </React.Fragment>
                     ))
                 }
                 { loader && <ArticleLoader /> }

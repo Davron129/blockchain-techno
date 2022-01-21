@@ -50,7 +50,6 @@ const Article = () => {
     const [ title, setTitle ] = useState<string>("");
     const [ post, setPost ] = useState<PostInterface>();
     const [ isActive, setIsActive ] = useState<boolean>(false);
-    const [ description, setDescription ] = useState<string>("");
 
     const handleClick = () => {
         setIsActive(false);
@@ -73,7 +72,6 @@ const Article = () => {
             .then(({data}) => {
                 setPost(data.data);
                 setTitle(data.data.title);
-                setDescription(data.data.body.blocks.filter((post: ParagraphInterface) => post.type === "paragraph")[0].data.text)
             })
         return () => {
             setTitle("Blockchain Texno")
@@ -84,9 +82,9 @@ const Article = () => {
     return (
         <>
             <Helmet>
-                <title>{title}</title>
-                <meta name="description" content={description} />
-                <meta property="og:url"           content={"http://www.blockchaintexno.uz/article/" + params.id} />
+                <title>Blockchain Texno</title>
+                <meta name="description" content={title} />
+                <meta property="og:url"           content={`http://www.blockchaintexno.uz/article/${params.id}`} />
                 <meta property="og:title"         content={"Blockchain Texno"} />
                 <meta property="og:description"   content={title} />
             </Helmet>
@@ -104,9 +102,9 @@ const Article = () => {
                                         <span className={Styles.tag}>{post.tag.name}</span>
                                     </div>
                                     <div className={Styles.right}>
-                                        <span className={Styles.read__time}>{Math.ceil(post.readingTime / 60)} min. read</span>
-                                        <span className={Styles.create__time}>{getFormattedTime(post.createdAt)}</span>
-                                        <span className={Styles.create__date}>{getFormattedDay(post.createdAt)}</span>
+                                        <span className={Styles.read__time}>{post.readingTime} min. read</span>
+                                        <span className={Styles.create__time}>{getFormattedTime(post.createdAt * 1000)}</span>
+                                        <span className={Styles.create__date}>{getFormattedDay(post.createdAt * 1000)}</span>
                                     </div>
                                 </div>
                             </div>
@@ -117,7 +115,7 @@ const Article = () => {
                                             {block.type === "paragraph" && <p className={Styles.article__text} dangerouslySetInnerHTML={{ __html: block.data.text}} />
                                             }
                                             {block.type === "image" && <figure className={Styles.article__img} >
-                                                <img src={`http://static.blockchaintexno.uz${block.data.file.url}`} alt={post.title} />  
+                                                <img src={block.data.file.url} alt={post.title} />  
                                                 { block.data.caption && <figcaption>{block.data.caption}</figcaption> }  
                                             </figure>}
                                         </ React.Fragment >

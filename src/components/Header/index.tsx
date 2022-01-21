@@ -47,7 +47,7 @@ const Header = () => {
                 <div className={Styles.header__right}>
                     <ul className={Styles.header__menu}>
                         <HeaderItem link={"#"} text={"Youtube"} />
-                        <HeaderItem link={"#"} text={"Telegram"} />
+                        <HeaderItem link={"https://t.me/blockchaintexno"} text={"Telegram"} />
                     </ul>
                     <label className={Styles.color__changer}>
                         <input

@@ -30,8 +30,16 @@
     padding: 24px 0;
 }
 
-.article__wrapper:not(:last-child) .article {
+.article__wrapper.border .article {
     border-bottom: 1px solid var(--articleBorder);
+}
+
+.article__wrapper.article__wrapper.border:last-of-type .article {
+    border-bottom: none;
+}
+
+.article__wrapper.noborder {
+    margin-bottom: 16px;
 }
 
 .article__header {
