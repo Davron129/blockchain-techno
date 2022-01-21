@@ -52,6 +52,7 @@
 .logo {
     width: 128px;
     margin-bottom: 24px;
+    cursor: pointer;
 }
 
 .date {
@@ -104,7 +105,7 @@
     text-align: right;
 }
 
-button {
+button{
     min-width: 156px;
     padding: 14px;
     text-align: center;
@@ -139,6 +140,12 @@ button {
     border-radius: 50%;
     border: 1.5px solid var(--socialLinkBorder);
     cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+.social__links .link:hover {
+    transform: translateY(-5px);
+    transition: .3s ease-in-out;
 }
 
 .social__links .link svg {
@@ -147,8 +154,12 @@ button {
 
 .download__btn {
     margin-bottom: 36px;
+}
+
+.download__btn a {
     display: inline-flex;
     align-items: center;
+    color: inherit;
 }
 
 .download__btn svg {

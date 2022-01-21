@@ -13,6 +13,7 @@ const ArticleContainer = () => {
     const [ posts, setPosts ] = useState<PostsInterface>([]);
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
     const [ isDataSend, setIsDataSend ] = useState<boolean>(true);
+    const [ headerImg, setHeaderImg ] = useState<string>("");
 
     window.addEventListener("scroll", () => {
         window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight && setIsDataSend(true);
@@ -33,6 +34,15 @@ const ArticleContainer = () => {
             })
     }
 
+    const getHeaderImage = () => {
+        new Api()
+            .getHeaderImage()
+            .then(({data}) => {
+                console.log(data.data[0].url);
+                setHeaderImg(data.data[0].url);
+            })
+    }
+
     useEffect(() => {
         curPage && isDataSend && getPosts();
     }, [isDataSend])
@@ -40,6 +50,7 @@ const ArticleContainer = () => {
     useEffect(() => {
         setPosts([])
         setIsLoading(true);
+        getHeaderImage();
     }, [])
 
     return (
@@ -47,6 +58,7 @@ const ArticleContainer = () => {
             <SearchBar />
             <section className={Styles.article__container}>
                 <div className={Styles.article__img}>
+                    <img src={headerImg} alt="" />
                 </div>
                 {/* mana shu qismni createAt ga qarab o`zgaradigan qilishimiz kerak */}
                 <div className={Styles.article__date}>

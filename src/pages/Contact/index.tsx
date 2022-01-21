@@ -9,15 +9,17 @@ import SocialLinks from './SocialLinks';
 import ContactFooter from './ContactFooter';
 import { useDispatch } from 'react-redux';
 import { enableScroll, disableScroll } from '../../redux/actions/scroll';
+import Api from '../../utils/api';
 
 
 const Contact = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [ name, setName ] = useState<string>("");
+    const [ orgName, setOrgName ] = useState<string>("");
+    const [ comment, setComment ] = useState<string>("");
     const [ isActive, setIsActive ] = useState<boolean>(false);
     const [ isSubmitted, setIsSubmitted ] = useState<boolean>(false);
-    const [ comment, setComment ] = useState<string>("");
 
     const handleClick = () => {
         setIsActive(false);
@@ -29,6 +31,12 @@ const Contact = () => {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
+
+        new Api()
+            .sendComment(name, orgName, comment)
+            .then((data) => {
+                console.log(data)
+            })
 
         setIsSubmitted(true);
     }
@@ -43,14 +51,14 @@ const Contact = () => {
             <article className={`${Styles.article} ${isActive && Styles.active}`}>
                 <MdClose className={Styles.close__icon} onClick={handleClick} />
                 <div className={Styles.article__container}>
-                    <ContactHeader />
+                    <ContactHeader handleClick={handleClick} />
                     <h3 className={Styles.title}>Biz bilan aloqa</h3>
                     {
                         !isSubmitted ? (
                             <div className={Styles.form__wrapper}>
                                 <form onSubmit={handleSubmit}>
                                     <label>
-                                        <span className={Styles.label__text}>Ismingiz</span>
+                                        <span className={Styles.label__text}>Ismingiz*</span>
                                         <input 
                                             type="text"
                                             value={name}
@@ -59,16 +67,16 @@ const Contact = () => {
                                         />
                                     </label>
                                     <label>
-                                        <span className={Styles.label__text}>Ismingiz</span>
+                                        <span className={Styles.label__text}>Tashkilot nomi*</span>
                                         <input 
                                             type="text"
-                                            value={name}
-                                            onChange={(e) => setName(e.target.value)}
-                                            placeholder='Ismingizni kiriting'
+                                            value={orgName}
+                                            onChange={(e) => setOrgName(e.target.value)}
+                                            placeholder='Tashkilot nomini kiriting'
                                         />
                                     </label>
                                     <label>
-                                        <span className={Styles.label__text}>Fikr uchun joy</span>
+                                        <span className={Styles.label__text}>Fikr uchun joy*</span>
                                         <textarea 
                                             value={comment}
                                             onChange={(e) => setComment(e.target.value)}
@@ -80,12 +88,14 @@ const Contact = () => {
                                     </div>
                                 </form>
                             </div>
-                        ) : <AfterSubmit />
+                        ) : <AfterSubmit handleClick={handleClick} />
                     }
                     <SocialLinks />
-                    <button className={Styles.download__btn}>
-                        <FiDownload className={Styles.btn__icon} />
-                        <span>Logoni yuklab oling</span>
+                    <button className={Styles.download__btn} >
+                        <a href="./../../assets/images/ic_logo.svg" download={true}>
+                            <FiDownload className={Styles.btn__icon} />
+                            <span>Logoni yuklab oling</span>
+                        </a>
                     </button>
                     <ContactFooter />
                 </div>

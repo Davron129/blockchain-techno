@@ -20,9 +20,6 @@ input, textarea {
     background-color: var(--articleBg);
     caret-color: aqua;
     border: 2px solid var(--text);
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
 }
 
 input:focus, textarea:focus {
@@ -80,6 +77,10 @@ img, svg {
 
 body {
     scroll-behavior: smooth;
+    letter-spacing: 0.02;
+    line-height: 1.4;
 }
 
-
+a {
+    text-decoration: none;
+}

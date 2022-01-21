@@ -8,7 +8,7 @@ export const getFormattedTime = (time) => {
 }
 
 export const getFormattedDay = (time) => {
-    const d = new Date(time).getDay();
+    const d = new Date(time).getDate();
     const m = new Date(time).getMonth() + 1;
     const y = new Date(time).getFullYear();
 

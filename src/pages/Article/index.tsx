@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
@@ -10,6 +10,7 @@ import { disableScroll, enableScroll } from '../../redux/actions/scroll';
 import { MdClose } from 'react-icons/md';
 import { TagInterface } from '../../schemas';
 import Styles from './ArticleStyles.module.css';
+import ShareLinks from './ShareLinks';
 
 interface ParagraphInterface {
     id: string;
@@ -85,6 +86,9 @@ const Article = () => {
             <Helmet>
                 <title>{title}</title>
                 <meta name="description" content={description} />
+                <meta property="og:url"           content={"http://www.blockchaintexno.uz/article/" + params.id} />
+                <meta property="og:title"         content={"Blockchain Texno"} />
+                <meta property="og:description"   content={title} />
             </Helmet>
             <article className={`${Styles.article} ${isActive && Styles.active}`}>
                 <MdClose className={Styles.close__icon} onClick={handleClick} />
@@ -113,14 +117,16 @@ const Article = () => {
                                             {block.type === "paragraph" && <p className={Styles.article__text} dangerouslySetInnerHTML={{ __html: block.data.text}} />
                                             }
                                             {block.type === "image" && <figure className={Styles.article__img} >
-                                                <img src={`http://blockchaintexno.uz/${block.data.file.url}`} alt={post.title} />  
+                                                <img src={`http://static.blockchaintexno.uz${block.data.file.url}`} alt={post.title} />  
                                                 { block.data.caption && <figcaption>{block.data.caption}</figcaption> }  
                                             </figure>}
                                         </ React.Fragment >
                                     ))
                                 }
+                                <div className={Styles.article__footer}>
+                                    <ShareLinks id={post._id} />
+                                </div>
                             </div>
-                            <div className={Styles.article__footer}></div>
                         </div>
                     )
                 }

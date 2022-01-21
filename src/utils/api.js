@@ -13,6 +13,20 @@ class Api {
         return axios.get(`http://blockchaintexno.uz/api/post/${id}`)
     }
 
+    sendComment = (name, orgName, comment) => {
+        return axios.post("http://blockchaintexno.uz/api/send/email", 
+            {
+                name: name,
+                orgName: orgName,
+                desc: comment
+            }
+        )
+    }
+
+    getHeaderImage = () => {
+        return axios.get("http://blockchaintexno.uz/api/all/head");
+    }
+
 }
 
 export default Api
