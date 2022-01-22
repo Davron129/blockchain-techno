@@ -37,6 +37,29 @@ const ArticleContainer = () => {
             })
     }
 
+    const searchPosts = (e: SubmitEvent) => {
+        e.preventDefault();
+        setLoader(true);
+        (curPage === null || curPage !== 1) && setIsLoading(true);
+        new Api()
+            .getPosts(1, searchText)    
+            .then(({data}) => {
+                setPosts((prev) => {
+                    if(curPage === null || curPage !== 1) {
+                        return [...data.data.posts];
+                    } else {
+                        return [...prev, ...data.data.posts]
+                    }
+                })
+                setCurPage(data.data.pagination.nextPage);
+                setLoader(false);
+                setIsDataSend(false);
+            })
+            .then(() => {
+                setIsLoading(false);
+            })
+    }
+
     const getHeaderImage = () => {
         new Api()
             .getHeaderImage()
@@ -57,7 +80,7 @@ const ArticleContainer = () => {
 
     return (
         <>  
-            <SearchBar text={searchText} setText={setSearchText} />
+            <SearchBar text={searchText} setText={setSearchText} searchFunc={searchPosts} />
             <section className={Styles.article__container}>
                 <a href='/' className={Styles.article__img}>
                     <img src={headerImg} alt="Blockchain Texno Header" />

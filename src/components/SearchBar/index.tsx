@@ -3,15 +3,16 @@ import Styles from './SearchBar.module.css';
 
 interface SearchBarInterface {
     text: string;
-    setText: Function
+    setText: Function;
+    searchFunc: Function
 }
 
-const SearchBar = ({ text, setText }: SearchBarInterface) => {
+const SearchBar = ({ text, setText, searchFunc }: SearchBarInterface) => {
 
     return (
         <div className={Styles.header__middle}>
             <div className={Styles.searchbar}>
-                <form>
+                <form onSubmit={(e) => searchFunc(e)}>
                     <input 
                         type="text" 
                         className={Styles.header__search} 
