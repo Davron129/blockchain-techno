@@ -8,15 +8,15 @@ import SearchBar from '../SearchBar'
 import ArticleLoader from '../Loader/ArticleLoader';
 import { getTimeInterval } from '../../utils/getTimeInterval';
 import { getCreatedDate } from './../../utils/getCreatedDate';
-import { getFormattedDay } from '../../utils/data';
 
 const ArticleContainer = () => {
     const [ curPage, setCurPage ] = useState<number>(1);
     const [ loader, setLoader ] = useState<boolean>(false);
     const [ posts, setPosts ] = useState<PostsInterface>([]);
+    const [ headerImg, setHeaderImg ] = useState<string>("");
+    const [ searchText, setSearchText ] = useState<string>("");
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
     const [ isDataSend, setIsDataSend ] = useState<boolean>(true);
-    const [ headerImg, setHeaderImg ] = useState<string>("");
 
     window.addEventListener("scroll", () => {
         window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight && setIsDataSend(true);
@@ -57,12 +57,11 @@ const ArticleContainer = () => {
 
     return (
         <>  
-            <SearchBar />
+            <SearchBar text={searchText} setText={setSearchText} />
             <section className={Styles.article__container}>
-                <div className={Styles.article__img}>
-                    <img src={headerImg} alt="" />
-                </div>
-                {/* mana shu qismni createAt ga qarab o`zgaradigan qilishimiz kerak */}
+                <a href='/' className={Styles.article__img}>
+                    <img src={headerImg} alt="Blockchain Texno Header" />
+                </a>
                 {
                     posts.map((post, index) => (
                         <React.Fragment key={post._id}>

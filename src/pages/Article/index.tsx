@@ -102,7 +102,7 @@ const Article = () => {
                                         <span className={Styles.tag}>{post.tag.name}</span>
                                     </div>
                                     <div className={Styles.right}>
-                                        <span className={Styles.read__time}>{post.readingTime} min. read</span>
+                                        <span className={Styles.read__time}>{post.readingTime} daq. o'qish</span>
                                         <span className={Styles.create__time}>{getFormattedTime(post.createdAt * 1000)}</span>
                                         <span className={Styles.create__date}>{getFormattedDay(post.createdAt * 1000)}</span>
                                     </div>

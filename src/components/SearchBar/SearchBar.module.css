@@ -39,15 +39,4 @@
     .header__middle {
         width: calc(100% - 30px);
     }
-
-    .header__search {
-        padding: 6px 32px 6px 8px;
-        font-size: 12px;
-    }
-
-    .search__icon {
-        width: 18px;
-        height: 18px;
-        right: 8px;
-    }
 }

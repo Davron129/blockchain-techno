@@ -19,7 +19,7 @@
 .footer__content span {
     font-size: 12px;
     color: var(--text-grey);
-    line-height: 17px;
+    letter-spacing: -0.03rem;
 }
 
 .footer__content .about__contact {

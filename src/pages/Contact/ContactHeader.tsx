@@ -3,8 +3,7 @@ import { RootState } from '../../redux/reducers/store';
 import { getFormattedDay } from '../../utils/data';
 
 import Styles from './ContactStyles.module.css';
-import Logo from '../../assets/images/Logo.png';
-import LogoLight from '../../assets/images/logoLight.png';
+import { ReactComponent as Logo } from '../../assets/images/ic_logo.svg';
 
 const ContactHeader = ({handleClick}: {handleClick:Function}) => {
     const colorScheme = useSelector((state: RootState) => state.colorScheme.isLight);
@@ -12,11 +11,11 @@ const ContactHeader = ({handleClick}: {handleClick:Function}) => {
     return (
         <div className={Styles.article__header}>
             <div className={Styles.logo} style={{ cursor: "pointer"}} onClick={() => handleClick()}>
-                {
-                    colorScheme
-                        ? <img src={Logo} alt="Blockchain texno logo" />
-                        : <img src={LogoLight} alt="Blockchain texno logo" />
-                }
+                    {
+                        colorScheme 
+                            ? <Logo/>
+                            : <Logo fill="#FFF"/>
+                    }
                 
             </div>
             <div className={Styles.date}>

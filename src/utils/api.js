@@ -5,8 +5,10 @@ class Api {
         this.headers = { }
     }
 
-    getPosts = (page) => {
-        return axios.get(`http://blockchaintexno.uz/api/all/post?pageCount=${page}`)
+    getPosts = (page, title) => {
+        return title 
+            ? axios.get(`http://blockchaintexno.uz/api/all/post?pageCount=${page}&title=${title}`)
+            : axios.get(`http://blockchaintexno.uz/api/all/post?pageCount=${page}`)
     }
 
     getPost = (id) => {
