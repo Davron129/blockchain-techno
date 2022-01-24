@@ -135,6 +135,21 @@
     padding: 20px;
 }
 
+.nf__wrapper {
+    width: 100%;
+    text-align: center;
+    color: var(--text);
+}
+
+.nf__code {
+    font-size: 96px;
+    line-height: 1.4;
+}
+
+.nf__content {
+    margin-bottom: 24px;
+}
+
 @media (max-width: 768px) {
     .article {
         width: 100%;

@@ -15,12 +15,13 @@ class Api {
         return axios.get(`https://blockchaintexno.uz/api/post/${id}`)
     }
 
-    sendComment = (name, orgName, comment) => {
+    sendComment = (name, orgName, comment, contact) => {
         return axios.post("https://blockchaintexno.uz/api/send/email", 
             {
                 name: name,
                 orgName: orgName,
-                desc: comment
+                desc: comment,
+                contact: contact
             }
         )
     }

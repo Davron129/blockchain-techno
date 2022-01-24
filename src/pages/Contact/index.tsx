@@ -18,6 +18,7 @@ const Contact = () => {
     const [ name, setName ] = useState<string>("");
     const [ orgName, setOrgName ] = useState<string>("");
     const [ comment, setComment ] = useState<string>("");
+    const [ contact, setContact ] = useState<string>("");
     const [ isActive, setIsActive ] = useState<boolean>(false);
     const [ isSubmitted, setIsSubmitted ] = useState<boolean>(false);
 
@@ -33,7 +34,7 @@ const Contact = () => {
         e.preventDefault();
 
         new Api()
-            .sendComment(name, orgName, comment)
+            .sendComment(name, orgName, comment, contact)
             .then(({data}) => {
                 console.log(data.data)
                 if(data.ok) {
@@ -65,6 +66,7 @@ const Contact = () => {
                                             value={name}
                                             onChange={(e) => setName(e.target.value)}
                                             placeholder='Ismingizni kiriting'
+                                            required
                                         />
                                     </label>
                                     <label>
@@ -74,6 +76,17 @@ const Contact = () => {
                                             value={orgName}
                                             onChange={(e) => setOrgName(e.target.value)}
                                             placeholder='Tashkilot nomini kiriting'
+                                            required
+                                        />
+                                    </label>
+                                    <label>
+                                        <span className={Styles.label__text}>Email*</span>
+                                        <input 
+                                            type="email"
+                                            value={contact}
+                                            required
+                                            onChange={(e) => setContact(e.target.value)}
+                                            placeholder='Emailingizini kiriting'
                                         />
                                     </label>
                                     <label>
@@ -82,11 +95,12 @@ const Contact = () => {
                                             value={comment}
                                             onChange={(e) => setComment(e.target.value)}
                                             placeholder='Fikringizni qoldiring'
+                                            required
                                         ></textarea>
                                     </label>
                                     <div className={Styles.form__btn}>
                                         <button
-                                            disabled={(name && orgName && comment) ? false : true}
+                                            // disabled={(name && orgName && comment) ? false : true}
                                         >
                                             Yuborish
                                         </button>

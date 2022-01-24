@@ -4,13 +4,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import Api from '../../utils/api';
+import { TagInterface } from '../../schemas';
 import { getFormattedTime, getFormattedDay } from '../../utils/data'
 import { disableScroll, enableScroll } from '../../redux/actions/scroll';
 
-import { MdClose } from 'react-icons/md';
-import { TagInterface } from '../../schemas';
-import Styles from './ArticleStyles.module.css';
+import NotFound from './NotFound';
 import ShareLinks from './ShareLinks';
+import { MdClose } from 'react-icons/md';
+import Styles from './ArticleStyles.module.css';
 
 interface ParagraphInterface {
     id: string;
@@ -50,6 +51,7 @@ const Article = () => {
     const [ title, setTitle ] = useState<string>("");
     const [ post, setPost ] = useState<PostInterface>();
     const [ isActive, setIsActive ] = useState<boolean>(false);
+    const [ isNotFound, setIsNotFound ] = useState<boolean>(false);
 
     const handleClick = () => {
         setIsActive(false);
@@ -57,7 +59,6 @@ const Article = () => {
         setTimeout(() => {
             navigate('/');
         }, 400)
-        
     }
 
     useEffect(() => {
@@ -70,8 +71,12 @@ const Article = () => {
         new Api()
             .getPost(params.id)
             .then(({data}) => {
-                setPost(data.data);
-                setTitle(data.data.title);
+                if(data.ok) {
+                    setPost(data.data);
+                    setTitle(data.data.title);
+                } else {
+                    setIsNotFound(true);
+                }
             })
         return () => {
             setTitle("Blockchain Texno")
@@ -128,6 +133,12 @@ const Article = () => {
                         </div>
                     )
                 }
+
+                { isNotFound && (
+                    <div className={Styles.article__container}>
+                        <NotFound handleClick={handleClick} />
+                    </div>
+                )}
             </article>
             <div className={Styles.overlay} onClick={handleClick}></div>
         </>
