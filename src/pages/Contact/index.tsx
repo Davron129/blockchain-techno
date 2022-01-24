@@ -34,11 +34,12 @@ const Contact = () => {
 
         new Api()
             .sendComment(name, orgName, comment)
-            .then((data) => {
-                console.log(data)
+            .then(({data}) => {
+                console.log(data.data)
+                if(data.ok) {
+                    setIsSubmitted(true);
+                }
             })
-
-        setIsSubmitted(true);
     }
 
     useEffect(() => {
@@ -84,7 +85,11 @@ const Contact = () => {
                                         ></textarea>
                                     </label>
                                     <div className={Styles.form__btn}>
-                                        <button>Yuborish</button>
+                                        <button
+                                            disabled={(name && orgName && comment) ? false : true}
+                                        >
+                                            Yuborish
+                                        </button>
                                     </div>
                                 </form>
                             </div>

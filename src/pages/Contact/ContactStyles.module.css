@@ -123,6 +123,17 @@ button{
     color: #fff;
     background-color: #000;
     cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+button:active {
+    transform: scale(0.95);
+    transition: .3s ease-in-out;
+    opacity: .9;
 }
 
 .social__links {

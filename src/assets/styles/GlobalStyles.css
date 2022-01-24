@@ -13,18 +13,18 @@
 
 input, textarea {
     width: 100%;
-    padding: 10px 12px;
-    color: var(--text);
     font-size: 14px;
     font-weight: 600;
-    background-color: var(--articleBg);
+    color: var(--text);
+    padding: 10px 12px;
     caret-color: #00a2ed;
     border: 2px solid var(--text);
+    background-color: var(--articleBg);
 }
 
 input:focus, textarea:focus {
-    border-color: var(--text);
     outline: none;
+    border-color: var(--text);
 }
 
 img, svg {

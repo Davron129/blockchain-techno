@@ -7,16 +7,16 @@ class Api {
 
     getPosts = (page, title) => {
         return title 
-            ? axios.get(`http://blockchaintexno.uz/api/all/post?pageCount=${page}&title=${title}`)
-            : axios.get(`http://blockchaintexno.uz/api/all/post?pageCount=${page}`)
+            ? axios.get(`https://blockchaintexno.uz/api/all/post?pageCount=${page}&title=${title}`)
+            : axios.get(`https://blockchaintexno.uz/api/all/post?pageCount=${page}`)
     }
 
     getPost = (id) => {
-        return axios.get(`http://blockchaintexno.uz/api/post/${id}`)
+        return axios.get(`https://blockchaintexno.uz/api/post/${id}`)
     }
 
     sendComment = (name, orgName, comment) => {
-        return axios.post("http://blockchaintexno.uz/api/send/email", 
+        return axios.post("https://blockchaintexno.uz/api/send/email", 
             {
                 name: name,
                 orgName: orgName,
@@ -26,7 +26,7 @@ class Api {
     }
 
     getHeaderImage = () => {
-        return axios.get("http://blockchaintexno.uz/api/all/head");
+        return axios.get("https://blockchaintexno.uz/api/all/head");
     }
 
 }
