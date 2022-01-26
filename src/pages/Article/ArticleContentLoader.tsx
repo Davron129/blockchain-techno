@@ -9,7 +9,7 @@ const ArticleContentLoader = () => {
                     <div className={Styles.header2}></div>
                 </div>
                 <div className={Styles.bottom}>
-                    <div className={Styles.tag}></div>
+                    <div className={Styles.loader__tag}></div>
                     <div className={Styles.right}>
                         <div className={Styles.read}></div>
                         <div className={Styles.date}></div>

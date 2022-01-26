@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+    useState,
+    useEffect
+} from 'react';
 import { Link } from 'react-router-dom';
-import Api from '../../utils/api';
-import { PostsInterface } from '../../schemas';
-import Styles from './ArticleStyles.module.css';
+
 import Loader from '../Loader';
 import SearchBar from '../SearchBar'
-import ArticleLoader from '../Loader/ArticleLoader';
 import DataNotFound from "../DataNotFound";
+import ArticleLoader from "../Loader/ArticleLoader";
+
+import Api from '../../utils/api';
+import { PostsInterface } from '../../schemas';
+import { getCreatedDate } from '../../utils/getCreatedDate';
 import { getTimeInterval } from '../../utils/getTimeInterval';
-import { getCreatedDate } from './../../utils/getCreatedDate';
+
+import Styles from './ArticleStyles.module.css';
 
 const ArticleContainer = () => {
     const [ curPage, setCurPage ] = useState<number>(1);
@@ -16,6 +22,7 @@ const ArticleContainer = () => {
     const [ posts, setPosts ] = useState<PostsInterface>([]);
     const [ headerImg, setHeaderImg ] = useState<string>("");
     const [ searchText, setSearchText ] = useState<string>("");
+    const [ headerLink, setHeaderLink ] = useState<string>("/");
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
     const [ isDataSend, setIsDataSend ] = useState<boolean>(true);
     const [ isGotResult, setIsGotResult ] = useState<boolean>(true);
@@ -72,6 +79,7 @@ const ArticleContainer = () => {
             .getHeaderImage()
             .then(({data}) => {
                 setHeaderImg(data.data[0].url);
+                setHeaderLink(data.data[0].link);
             })
     }
 
@@ -92,7 +100,7 @@ const ArticleContainer = () => {
                 isGotResult
                     ? (
                         <section className={Styles.article__container}>
-                            <a href='/' className={Styles.article__img}>
+                            <a href={headerLink} className={Styles.article__img}>
                                 <img src={headerImg} alt="Blockchain Texno Header" />
                             </a>
                             {
@@ -133,7 +141,7 @@ const ArticleContainer = () => {
                                     </React.Fragment>
                                 ))
                             }
-                            {/*{ loader && <ArticleLoader /> }*/}
+                            { loader && <ArticleLoader /> }
                         </section>
                     ) : (
                         <DataNotFound />

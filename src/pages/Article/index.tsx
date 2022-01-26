@@ -93,7 +93,7 @@ const Article = () => {
             <Helmet>
                 <title>Blockchain Texno</title>
                 <meta name="description" content={title} />
-                <meta property="og:url"           content={`http://www.blockchaintexno.uz/article/${params.id}`} />
+                <meta property="og:url"           content={`https://www.blockchaintexno.uz/article/${params.id}`} />
                 <meta property="og:title"         content={"Blockchain Texno"} />
                 <meta property="og:description"   content={title} />
             </Helmet>

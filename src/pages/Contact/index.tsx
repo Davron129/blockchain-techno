@@ -1,16 +1,23 @@
-import { useState, useEffect, FormEvent } from 'react';
-import { MdClose } from 'react-icons/md';
+import {
+    useState,
+    useEffect,
+    FormEvent
+} from 'react';
+import { Helmet } from "react-helmet";
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Styles from './ContactStyles.module.css';
-import { FiDownload } from 'react-icons/fi';
-import ContactHeader from './ContactHeader';
+
 import AfterSubmit from './AfterSubmit';
 import SocialLinks from './SocialLinks';
+import ContactHeader from './ContactHeader';
 import ContactFooter from './ContactFooter';
-import { useDispatch } from 'react-redux';
-import { enableScroll, disableScroll } from '../../redux/actions/scroll';
-import Api from '../../utils/api';
 
+import Api from '../../utils/api';
+import { enableScroll, disableScroll } from '../../redux/actions/scroll';
+
+import { MdClose } from 'react-icons/md';
+import { FiDownload } from 'react-icons/fi';
+import Styles from './ContactStyles.module.css';
 
 const Contact = () => {
     const navigate = useNavigate();
@@ -32,7 +39,6 @@ const Contact = () => {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-
         new Api()
             .sendComment(name, orgName, comment, contact)
             .then(({data}) => {
@@ -50,6 +56,10 @@ const Contact = () => {
 
     return (
         <>
+            <Helmet>
+                <title>Blockchain Texno</title>
+                <meta name="description" content="Bitkoin, kriptovalyutalar, blokcheyn va markazlashmagan texnologiyalar haqida eng muhim voqealar haqida fikr yuritamiz." />
+            </Helmet>
             <article className={`${Styles.article} ${isActive && Styles.active}`}>
                 <MdClose className={Styles.close__icon} onClick={handleClick} />
                 <div className={Styles.article__container}>
@@ -99,11 +109,7 @@ const Contact = () => {
                                         ></textarea>
                                     </label>
                                     <div className={Styles.form__btn}>
-                                        <button
-                                            // disabled={(name && orgName && comment) ? false : true}
-                                        >
-                                            Yuborish
-                                        </button>
+                                        <button>Yuborish</button>
                                     </div>
                                 </form>
                             </div>
@@ -111,7 +117,7 @@ const Contact = () => {
                     }
                     <SocialLinks />
                     <button className={Styles.download__btn} >
-                        <a href="http://static.blockchaintexno.uz/logotype.zip" download={true}>
+                        <a href="https://static.blockchaintexno.uz/logotype.zip" download={true}>
                             <FiDownload className={Styles.btn__icon} />
                             <span>Logoni yuklab oling</span>
                         </a>
