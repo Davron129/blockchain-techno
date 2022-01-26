@@ -22,6 +22,7 @@
 
 .header__logo {
     width: 128px;
+    display: block;
     cursor: pointer;
 }
 

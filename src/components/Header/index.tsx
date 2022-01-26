@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from 'react-router-dom'
 import { RootState } from "../../redux/reducers/store";
 import {FiMoon, FiSun} from "react-icons/fi";
 import { ReactComponent as Logo } from '../../assets/images/ic_logo.svg';
@@ -27,13 +28,13 @@ const Header = () => {
         <div className={Styles.header}>
             <div className={Styles.header__container}>
                 <div className={Styles.header__left}>
-                    <div className={Styles.header__logo}>
+                    <Link to={"/"} className={Styles.header__logo}>
                         {
                             colorScheme 
                                 ? <Logo/>
                                 : <Logo fill="#FFF"/>
                         }
-                    </div>
+                    </Link>
                 </div>
                 <div className={Styles.header__right}>
                     <ul className={Styles.header__menu}>
