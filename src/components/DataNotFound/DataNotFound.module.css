@@ -2,6 +2,7 @@
 
 .nf__wrapper {
     margin-top: 92px;
+    height: calc(100vh - 190px);
     display: flex;
     align-items: center;
     justify-content: center;
