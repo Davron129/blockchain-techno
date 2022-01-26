@@ -12,6 +12,7 @@ import NotFound from './NotFound';
 import ShareLinks from './ShareLinks';
 import { MdClose } from 'react-icons/md';
 import Styles from './ArticleStyles.module.css';
+import ArticleContentLoader from "./ArticleContentLoader";
 
 interface ParagraphInterface {
     id: string;
@@ -48,9 +49,10 @@ const Article = () => {
     const params = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [ title, setTitle ] = useState<string>("");
     const [ post, setPost ] = useState<PostInterface>();
+    const [ title, setTitle ] = useState<string>("");
     const [ isActive, setIsActive ] = useState<boolean>(false);
+    const [ isLoaded, setIsLoaded ] = useState<boolean>(false);
     const [ isNotFound, setIsNotFound ] = useState<boolean>(false);
 
     const handleClick = () => {
@@ -68,9 +70,11 @@ const Article = () => {
     }, [dispatch]);
 
     useEffect(() => {
+        setIsLoaded(false);
         new Api()
             .getPost(params.id)
             .then(({data}) => {
+                setIsLoaded(true);
                 if(data.ok) {
                     setPost(data.data);
                     setTitle(data.data.title);
@@ -96,7 +100,7 @@ const Article = () => {
             <article className={`${Styles.article} ${isActive && Styles.active}`}>
                 <MdClose className={Styles.close__icon} onClick={handleClick} />
                 {
-                    post && (
+                    isLoaded ? (post && (
                         <div className={Styles.article__container}>
                             <div className={Styles.article__header}>
                                 <h3 className={Styles.article__title}>
@@ -131,9 +135,10 @@ const Article = () => {
                                 </div>
                             </div>
                         </div>
+                    )) : (
+                        <ArticleContentLoader />
                     )
                 }
-
                 { isNotFound && (
                     <div className={Styles.article__container}>
                         <NotFound handleClick={handleClick} />

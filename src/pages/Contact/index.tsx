@@ -111,7 +111,7 @@ const Contact = () => {
                     }
                     <SocialLinks />
                     <button className={Styles.download__btn} >
-                        <a href="./../../assets/images/ic_logo.svg" download={true}>
+                        <a href="http://static.blockchaintexno.uz/logotype.zip" download={true}>
                             <FiDownload className={Styles.btn__icon} />
                             <span>Logoni yuklab oling</span>
                         </a>

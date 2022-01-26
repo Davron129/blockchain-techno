@@ -6,6 +6,7 @@ import Styles from './ArticleStyles.module.css';
 import Loader from '../Loader';
 import SearchBar from '../SearchBar'
 import ArticleLoader from '../Loader/ArticleLoader';
+import DataNotFound from "../DataNotFound";
 import { getTimeInterval } from '../../utils/getTimeInterval';
 import { getCreatedDate } from './../../utils/getCreatedDate';
 
@@ -17,6 +18,7 @@ const ArticleContainer = () => {
     const [ searchText, setSearchText ] = useState<string>("");
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
     const [ isDataSend, setIsDataSend ] = useState<boolean>(true);
+    const [ isGotResult, setIsGotResult ] = useState<boolean>(true);
 
     window.addEventListener("scroll", () => {
         window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight && setIsDataSend(true);
@@ -51,6 +53,11 @@ const ArticleContainer = () => {
                         return [...prev, ...data.data.posts]
                     }
                 })
+                if(data.data.posts.length === 0) {
+                    setIsGotResult(false);
+                } else {
+                    setIsGotResult(true);
+                }
                 setCurPage(data.data.pagination.nextPage);
                 setLoader(false);
                 setIsDataSend(false);
@@ -81,50 +88,57 @@ const ArticleContainer = () => {
     return (
         <>  
             <SearchBar text={searchText} setText={setSearchText} searchFunc={searchPosts} />
-            <section className={Styles.article__container}>
-                <a href='/' className={Styles.article__img}>
-                    <img src={headerImg} alt="Blockchain Texno Header" />
-                </a>
-                {
-                    posts.map((post, index) => (
-                        <React.Fragment key={post._id}>
+            {
+                isGotResult
+                    ? (
+                        <section className={Styles.article__container}>
+                            <a href='/' className={Styles.article__img}>
+                                <img src={headerImg} alt="Blockchain Texno Header" />
+                            </a>
                             {
-                                index === 0
-                                    ? (
-                                        <div className={Styles.article__date}>
+                                posts.map((post, index) => (
+                                    <React.Fragment key={post._id}>
+                                        {
+                                            index === 0
+                                                ? (
+                                                    <div className={Styles.article__date}>
                                             <span>
                                                 {getCreatedDate(null, post.createdAt * 1000)}
                                             </span>
-                                        </div>
-                                    ) : (
-                                        getCreatedDate(posts[index-1].createdAt * 1000 , post.createdAt * 1000) && <div className={Styles.article__date}>
+                                                    </div>
+                                                ) : (
+                                                    getCreatedDate(posts[index-1].createdAt * 1000 , post.createdAt * 1000) && <div className={Styles.article__date}>
                                             <span>
                                                 {getCreatedDate(posts[index-1].createdAt * 1000 , post.createdAt * 1000)}
                                             </span>
-                                        </div>
-                                    )
-                            }
+                                                    </div>
+                                                )
+                                        }
 
-                            <div className={`${Styles.article__wrapper} ${(index > 0 && index !== posts.length - 1 && getCreatedDate(post.createdAt * 1000, posts[index+1].createdAt * 1000)) ? Styles.noborder : Styles.border}`}>
-                                <article className={Styles.article}>
-                                    <div className={Styles.article__header}>
-                                        <span className={Styles.article__tag}>{post.tag.name}</span>
-                                        <span className={Styles.article__time}>{getTimeInterval(post.createdAt)}</span>
-                                    </div>
-                                    <div className={Styles.article__content}>
-                                        <h3 className={Styles.article__title}>
-                                            <Link to={`/article/${post._id}`}>
-                                                {post.title}
-                                            </Link>
-                                        </h3>
-                                    </div>
-                                </article>
-                            </div>
-                        </React.Fragment>
-                    ))
+                                        <div className={`${Styles.article__wrapper} ${(index > 0 && index !== posts.length - 1 && getCreatedDate(post.createdAt * 1000, posts[index+1].createdAt * 1000)) ? Styles.noborder : Styles.border}`}>
+                                            <article className={Styles.article}>
+                                                <div className={Styles.article__header}>
+                                                    <span className={Styles.article__tag}>{post.tag.name}</span>
+                                                    <span className={Styles.article__time}>{getTimeInterval(post.createdAt)}</span>
+                                                </div>
+                                                <div className={Styles.article__content}>
+                                                    <h3 className={Styles.article__title}>
+                                                        <Link to={`/article/${post._id}`}>
+                                                            {post.title}
+                                                        </Link>
+                                                    </h3>
+                                                </div>
+                                            </article>
+                                        </div>
+                                    </React.Fragment>
+                                ))
+                            }
+                            {/*{ loader && <ArticleLoader /> }*/}
+                        </section>
+                    ) : (
+                        <DataNotFound />
+                    )
                 }
-                { loader && <ArticleLoader /> }
-            </section>
             { isLoading && <Loader /> }
         </>
     )

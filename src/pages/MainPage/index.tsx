@@ -7,7 +7,6 @@ import { Helmet } from "react-helmet";
 
 
 const MainPage = () => {
-
     return (
         <>
             <Helmet>
