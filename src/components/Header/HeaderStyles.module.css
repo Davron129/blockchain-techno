@@ -43,10 +43,10 @@
 
 .header__link {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: var(--semiBold);
     text-decoration: none;
     color: var(--text);
-    letter-spacing: -0.04rem;
+    letter-spacing: -0.01rem;
 }
 
 .color__changer {

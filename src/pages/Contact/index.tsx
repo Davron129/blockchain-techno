@@ -89,13 +89,13 @@ const Contact = () => {
                                         />
                                     </label>
                                     <label>
-                                        <span className={Styles.label__text}>Email*</span>
+                                        <span className={Styles.label__text}>Email yoki telefon raqam*</span>
                                         <input 
-                                            type="email"
+                                            type="text"
                                             value={contact}
                                             required
                                             onChange={(e) => setContact(e.target.value)}
-                                            placeholder='Emailingizini kiriting'
+                                            placeholder='Email yoki telefon raqamingizini kiriting'
                                         />
                                     </label>
                                     <label>

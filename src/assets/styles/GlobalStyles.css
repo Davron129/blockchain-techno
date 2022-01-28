@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 *, *::after, *::before {
     border: 0;
@@ -20,6 +20,7 @@ input, textarea {
     caret-color: #00a2ed;
     border: 2px solid var(--text);
     background-color: var(--articleBg);
+    letter-spacing: -0.028;
 }
 
 input:focus, textarea:focus {
@@ -44,6 +45,8 @@ img, svg {
     --socialLink-dark: #888888; 
     --socialLinkBorder: #f3f3f3;
     --letterSpacing: -0.02em;
+    --semiBold: 600;
+    --bold: 700;
 }
 
 [color-scheme="light"] {
@@ -85,3 +88,4 @@ body {
 a {
     text-decoration: none;
 }
+
