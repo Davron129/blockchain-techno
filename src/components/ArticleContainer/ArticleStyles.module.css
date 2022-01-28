@@ -67,6 +67,7 @@
     line-height: 25px;
     color: var(--text);
     text-decoration: none;
+    letter-spacing: -0.04rem;
 }
 
 .article__content .article__title a:hover {

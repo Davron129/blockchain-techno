@@ -43,7 +43,7 @@ img, svg {
     --socialLink-light: #888888; 
     --socialLink-dark: #888888; 
     --socialLinkBorder: #f3f3f3;
-    --letterSpacing: -0.02rem;
+    --letterSpacing: -0.02em;
 }
 
 [color-scheme="light"] {

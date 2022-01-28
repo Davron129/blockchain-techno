@@ -42,7 +42,6 @@ const Contact = () => {
         new Api()
             .sendComment(name, orgName, comment, contact)
             .then(({data}) => {
-                console.log(data.data)
                 if(data.ok) {
                     setIsSubmitted(true);
                 }
@@ -58,7 +57,7 @@ const Contact = () => {
         <>
             <Helmet>
                 <title>Blockchain Texno</title>
-                <meta name="description" content="Bitkoin, kriptovalyutalar, blokcheyn va markazlashmagan texnologiyalar haqida eng muhim voqealar haqida fikr yuritamiz." />
+                <meta name="description" content="To'liq elektr avtomobillar va ularga oid texnologiyalar haqidagi onlayn nashr." />
             </Helmet>
             <article className={`${Styles.article} ${isActive && Styles.active}`}>
                 <MdClose className={Styles.close__icon} onClick={handleClick} />
