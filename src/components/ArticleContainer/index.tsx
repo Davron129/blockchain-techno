@@ -110,20 +110,20 @@ const ArticleContainer = () => {
                                             index === 0
                                                 ? (
                                                     <div className={Styles.article__date}>
-                                            <span>
-                                                {getCreatedDate(null, post.createdAt * 1000)}
-                                            </span>
+                                                        <span>
+                                                            {getCreatedDate(null, post.createdAt * 1000)}
+                                                        </span>
                                                     </div>
                                                 ) : (
                                                     getCreatedDate(posts[index-1].createdAt * 1000 , post.createdAt * 1000) && <div className={Styles.article__date}>
-                                            <span>
-                                                {getCreatedDate(posts[index-1].createdAt * 1000 , post.createdAt * 1000)}
-                                            </span>
+                                                        <span>
+                                                            {getCreatedDate(posts[index-1].createdAt * 1000 , post.createdAt * 1000)}
+                                                        </span>
                                                     </div>
                                                 )
                                         }
 
-                                        <div className={`${Styles.article__wrapper} ${(index > 0 && index !== posts.length - 1 && getCreatedDate(post.createdAt * 1000, posts[index+1].createdAt * 1000)) ? Styles.noborder : Styles.border}`}>
+                                        <div className={`${Styles.article__wrapper} ${(index >= 0 && index !== posts.length - 1 && getCreatedDate(post.createdAt * 1000, posts[index+1].createdAt * 1000)) ? Styles.noborder : Styles.border}`}>
                                             <article className={Styles.article}>
                                                 <div className={Styles.article__header}>
                                                     <span className={Styles.article__tag}>{post.tag.name}</span>
