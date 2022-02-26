@@ -7,10 +7,10 @@ const SocialLinks = () => {
         <div className={Styles.social__links}>
             <span className={Styles.text}>Bizni kuzatib boring!</span>
             <div className={Styles.links__wrapper}>
-                <a target={"_blank"} rel={"noreferrer"} href="https://t.me/fidostudio" className={Styles.link}>
+                <a target={"_blank"} rel={"noreferrer"} href="https://t.me/blockchaintexno" className={Styles.link}>
                     <FaTelegramPlane />
                 </a>
-                <a target={"_blank"} rel={"noreferrer"} href="https://www.instagram.com/fido_studio" className={Styles.link}>
+                <a target={"_blank"} rel={"noreferrer"} href="https://www.instagram.com/blockchaintexno" className={Styles.link}>
                     <FiInstagram />
                 </a>
             </div>
